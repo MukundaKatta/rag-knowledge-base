@@ -1,84 +1,27 @@
-# RAG Knowledge Base
+# rag-knowledge-base
 
-A retrieval-augmented generation (RAG) system for querying your documents using natural language, powered by FastAPI and ChromaDB.
+RAG (Retrieval-Augmented Generation) knowledge base application with a FastAPI backend, ChromaDB for vector storage, and Claude API integration.
 
-## Features
+## What's actually here
 
-- **Document Ingestion** — Upload PDFs, DOCX, and text files with automatic processing
-- **Smart Chunking** — Configurable text splitting via LangChain splitters
-- **Vector Search** — Semantic retrieval using Sentence Transformers + ChromaDB
-- **AI Chat** — Conversational Q&A with streaming responses (Anthropic Claude)
-- **Citations** — Every answer includes source references with chunk previews
-- **Collections** — Organize documents into named knowledge bases
-- **Full-Text Search** — Keyword-based search alongside semantic search
-- **Processing Status** — Track document ingestion progress in real time
-- **Analytics** — Query and usage analytics dashboard
-- **Configurable** — Adjust chunking, embedding, and retrieval settings via UI
+This repo has two distinct parts:
 
-## Tech Stack
+**backend/** - A real FastAPI application with working structure. It includes routers for collections, documents, chat, search, settings, and analytics. Dependencies include FastAPI, ChromaDB, sentence-transformers, Anthropic SDK, SQLAlchemy, and more. There is a Dockerfile, docker-compose.yml, and a proper app layout (api/, core/, models/, services/). Whether the individual route handlers are fully implemented or partially stubbed would require deeper inspection, but the scaffolding is real.
 
-- **Backend:** FastAPI + SQLAlchemy (async) + aiosqlite
-- **Vector Store:** ChromaDB
-- **Embeddings:** Sentence Transformers (all-MiniLM-L6-v2)
-- **LLM:** Anthropic Claude (streaming via SSE)
-- **Document Parsing:** pypdf, python-docx, Unstructured
-- **Text Splitting:** LangChain text splitters
-- **Frontend:** React 18 + Vite + Tailwind CSS + React Router
-- **Testing:** pytest (backend) + Vitest (frontend)
-- **Containerization:** Docker + Docker Compose
+**frontend/** - A frontend directory (contents not fully audited).
 
-## Getting Started
+**src/core.py** - A separate cookie-cutter stub class (`RagKnowledgeBase`) with generic methods (process, analyze, transform, validate, export) that all return `{"ok": True}` without doing anything. This file is unrelated to the actual backend code and appears to have been auto-generated.
 
-### Prerequisites
+## Tech stack (backend)
 
-- Python 3.11+
-- Node.js 18+
-- Docker & Docker Compose (recommended)
-- Anthropic API key
+- FastAPI + Uvicorn
+- ChromaDB for vector embeddings
+- SQLAlchemy + aiosqlite
+- Anthropic SDK (Claude API)
+- sentence-transformers for embeddings
+- langchain-text-splitters
+- Docker support via Dockerfile and docker-compose.yml
 
-### Installation
+## Status
 
-```bash
-git clone <repo-url>
-cd rag-knowledge-base
-cp .env.example .env   # add your ANTHROPIC_API_KEY
-```
-
-### Run
-
-```bash
-# With Docker (recommended)
-docker-compose up
-
-# Or manually
-cd backend && pip install -r requirements.txt && uvicorn app.main:app --reload
-cd frontend && npm install && npm run dev
-```
-
-## Project Structure
-
-```
-backend/
-├── app/
-│   ├── api/             # REST endpoints (collections, documents, chat, search)
-│   ├── models/          # SQLAlchemy models and Pydantic schemas
-│   ├── services/
-│   │   ├── document_processor.py  # File parsing pipeline
-│   │   ├── chunker.py             # Text splitting
-│   │   ├── embedder.py            # Embedding generation
-│   │   ├── retriever.py           # Vector similarity search
-│   │   ├── llm_service.py         # Claude streaming integration
-│   │   └── analytics.py           # Usage tracking
-│   ├── core/            # Config and database setup
-│   └── main.py          # FastAPI app entry point
-└── tests/               # Backend test suite
-frontend/
-└── src/
-    ├── components/      # Sidebar, Chat, Upload, Citations, Markdown
-    ├── pages/           # Chat, Documents, Collections, Search, Settings
-    └── hooks/           # useSSE, useChat, useDocuments, useSearch
-```
-
-## License
-
-MIT
+The backend has real application structure and dependencies, but the src/core.py is a non-functional stub. The actual functionality of the backend routes has not been verified.
