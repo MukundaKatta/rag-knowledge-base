@@ -43,19 +43,19 @@ async def stream_response(
     history: list[dict] | None = None,
 ) -> AsyncGenerator[str, None]:
     """Stream Claude response as SSE data chunks."""
-    client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+    client = anthropic.AsyncAnthropic(api_key=settings.anthropic_api_key)
 
     system = _build_system_prompt(chunks)
     messages = _build_messages(query, history)
 
-    with client.messages.stream(
+    async with client.messages.stream(
         model=settings.llm_model,
         max_tokens=settings.max_tokens,
         temperature=settings.temperature,
         system=system,
         messages=messages,
     ) as stream:
-        for text in stream.text_stream:
+        async for text in stream.text_stream:
             yield text
 
 
