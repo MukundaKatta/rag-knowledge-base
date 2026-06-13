@@ -12,7 +12,7 @@ unstructured==0.16.11
 langchain-text-splitters==0.3.4
 sse-starlette==2.2.1
 pydantic==2.10.4
-pydantic-settings==2.7.1
+pydantic-settings==2.14.1
 pytest==8.3.4
 pytest-asyncio==0.25.0
 httpx==0.28.1
